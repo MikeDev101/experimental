@@ -8,6 +8,7 @@ class cloudlink {
       color1: '#00daee',
       color2: '#00daee',
       color3: '#00747f',
+      menuIconURI: null,
       blockIconURI: icon,
       blocks: [
         {
