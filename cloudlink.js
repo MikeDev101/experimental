@@ -106,5 +106,6 @@ class cloudlink {
     return this.write(`M0 \n`);
   }
 }
-console.log("MikeDEV's CloudLink API | Loaded version " + vers);
+console.log("MikeDEV's CloudLink | Getting *yawn* up...');
 Scratch.extensions.register(new cloudlink())
+console.log("MikeDEV's CloudLink | Wide awake, and loaded version " + vers + "!");
