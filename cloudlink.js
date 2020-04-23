@@ -47,6 +47,6 @@ class cloudlink {
     return;
   }
 }
-console.log("Loaded MikeDEV's CloudLink API successfully!");
-console.log("API Version " + vers);
+console.log("Loaded MikeDEV's CloudLink API successfully! :D");
+console.log("CloudLink API Version " + vers + ' | Built upon memes and a whole lotta covid-19 depression!');
 Scratch.extensions.register(new cloudlink())
