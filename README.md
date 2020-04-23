@@ -1,2 +1,2 @@
-## My experimental projects repository
-Mini repository for hosting my experimental stuff.
+## My Scratch 3 Extensions repository
+Yep.
