@@ -83,14 +83,10 @@ class cloudlink {
                 arguments: {
                     CONNECTION: {
                         type: Scratch.ArgumentType.NUMBER,
-                        menu: fooMenu,
+                        menu: ['127.0.0.1:3000', 'localhost:3000', 'mikedev101.pagekite.me'],
                     },
                 },
             }, ],
-            menus: {
-                fooMenu: {
-                    items: ['127.0.0.1:3000', 'localhost:3000', 'mikedev101.pagekite.me']
-                },
             }
         }
     }
