@@ -38,11 +38,13 @@ class cloudlink {
                 opcode: 'rpStatus',
                 blockType: Scratch.BlockType.REPORTER,
                 text: 'Status',
-            }, {
+            }, 
+            {
                 opcode: 'isConnected',
                 blockType: Scratch.BlockType.BOOLEAN,
                 text: 'Connected?',
-            }, {
+            },
+            {
                 opcode: 'get',
                 blockType: Scratch.BlockType.REPORTER,
                 text: 'Get from websocket [A]',
@@ -52,7 +54,8 @@ class cloudlink {
                         defaultValue: 'Insert an IP here.',
                     },
                 },
-            }, {
+            },
+            {
                 opcode: 'set',
                 blockType: Scratch.BlockType.COMMAND,
                 text: 'Set [DATA] to [VALUE]',
@@ -66,7 +69,8 @@ class cloudlink {
                         defaultValue: 'value',
                     },
                 },
-            }, {
+            },
+            {
                 opcode: 'cn',
                 blockType: Scratch.BlockType.COMMAND,
                 text: 'Connect to [WS]',
@@ -76,7 +80,8 @@ class cloudlink {
                         defaultValue: 'Some IP',
                     },
                 },
-            }, {
+            },
+            {
                 opcode: 'ds',
                 blockType: Scratch.BlockType.COMMAND,
                 text: 'Disconnect from [CONNECTION]',
@@ -86,13 +91,13 @@ class cloudlink {
                         menu: fooBar,
                     },
                 },
-            }, ],
+            }],
             menus: {
                 fooBar: {
                     items: ["owo"],
                 }
-            }
-        };
+            };
+        }
     }
 }
 get({A}) {
