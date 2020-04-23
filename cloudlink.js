@@ -45,22 +45,30 @@ class cloudlink {
             },
           },
         },
+        {
+          opcode: 'close',
+          blockType: Scratch.BlockType.COMMAND,
+          text: 'Close websocket connection',
+        },
       ],
     }
   }
   get({A}) {
-    console.log(A);
     return A;
   }
   rpStatus() {
     return wsstatus;
   }
   open({WS}) {
-    console.log('Attempting to open connection to websocket server to ' + WS);
-    wsstatus = ('Connecting to ' + WS);
+    console.log('Connecting to websocket server ' + WS);
+    wsstatus = ('Connecting to websocket server ' + WS);
+    return;
+  }
+  close() {
+    console.log('Now closing connection');
+    wsstatus = ('Ready');
     return;
   }
 }
-console.log("Loaded MikeDEV's CloudLink API successfully! :D");
-console.log("CloudLink API Version " + vers + ' | Built upon memes and a whole lotta covid-19 depression!');
+console.log("MikeDEV's CloudLink API | Loaded version " + vers);
 Scratch.extensions.register(new cloudlink())
