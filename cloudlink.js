@@ -2,6 +2,8 @@ const icon = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAYAAACOEfKt
 
 const vers = '0.1.0';
 
+var wsstatus = null;
+
 class cloudlink {
   constructor() {}
   getInfo() {
@@ -25,6 +27,11 @@ class cloudlink {
           },
         },
         {
+          opcode: 'rpStatus',
+          blockType: Scratch.BlockType.REPORTER,
+          text: 'Report current API status',
+        },
+        {
           opcode: 'open',
           blockType: Scratch.BlockType.COMMAND,
           text: 'Open websocket connection to [WS]',
@@ -42,8 +49,12 @@ class cloudlink {
     console.log(A);
     return A;
   }
+  rpStatus() {
+    return wsstatus;
+  }
   open({WS}) {
     console.log('Attempting to open connection to websocket server to ' + WS);
+    wsstatus = 'connecting';
     return;
   }
 }
