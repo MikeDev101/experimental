@@ -19,6 +19,7 @@ const icon = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAYAAACOEfKt
 const vers = '0.1.3';
 var wsstatus = 'Ready';
 var connected = false;
+var consocket = null;
 
 class cloudlink {
     constructor(runtime, extensionId) {
@@ -104,7 +105,16 @@ rpStatus() {
 cn(args, util) {
     const WS = args.WS;
     console.log("CloudLink API v" + vers + ' | Now connecting to ' + WS + '...');
-    wsstatus = ('Connecting to websocket server ' + WS);
+    wsstatus = ('Now connecting to ' + WS);
+    consocket = new WebSocket(WS);
+    consocket.onopen() = function(evt) {
+        console.log("CloudLink API v" + vers + ' | Connected to ' + WS + '!');
+        wsstatus = ('Connected to ' + WS);
+    }
+    consocket.onerror() = function(evt) {
+        console.log("CloudLink API v" + vers + ' | Error connecting to ' + WS + '!');
+        wsstatus = ('Error connecting to ' + WS);
+    }
     return;
 }
 ds(args, util) {
