@@ -94,8 +94,6 @@ class cloudlink {
             }]
         }
     }
-}
-
 get(args, util) {
     const A = args.A;
     return A;
@@ -124,5 +122,6 @@ set(args, util) {
     return;
 };
 };
+
 Scratch.extensions.register(new cloudlink());
 console.log("CloudLink API v" + vers + " | Ready for your command!");
