@@ -97,28 +97,28 @@ class cloudlink {
 get(args, util) {
     const A = args.A;
     return A;
-};
+}
 rpStatus() {
     return wsstatus;
-};
+}
 cn(args, util) {
     const WS = args.WS;
     console.log("CloudLink API v" + vers + ' | Now connecting to ' + WS);
     wsstatus = ('Connecting to websocket server ' + WS);
     return '\n';
-};
+}
 ds(args, util) {
     const CONNECTION = args.CONNECTION;
     console.log("CloudLink API v" + vers + ' | Now closing connection ' + CONNECTION + '... ');
     wsstatus = ('Ready');
     return;
-};
+}
 isConnected() {
     return connected;
-};
+}
 set(args, util) {
     return;
-};
+}
 };
 
 Scratch.extensions.register(new cloudlink());
