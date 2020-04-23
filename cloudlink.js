@@ -107,5 +107,5 @@ class cloudlink {
   }
 }
 console.log("MikeDEV's CloudLink | Getting *yawn* up...');
-Scratch.extensions.register(new cloudlink())
+Scratch.extensions.register(new cloudlink());
 console.log("MikeDEV's CloudLink | Wide awake, and loaded version " + vers + "!");
