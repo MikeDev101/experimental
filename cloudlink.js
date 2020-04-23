@@ -83,35 +83,40 @@ class cloudlink {
                 arguments: {
                     CONNECTION: {
                         type: Scratch.ArgumentType.NUMBER,
-                        menu: ['127.0.0.1:3000', 'localhost:3000', 'mikedev101.pagekite.me'],
+                        menu: fooBar,
                     },
                 },
             }, ],
+            menus: {
+                fooBar: {
+                    items: ["owo"],
+                }
             }
-        }
+        };
     }
-    get({A}) {
-        return A;
-    }
-    rpStatus() {
-        return wsstatus;
-    }
-    cn({WS}) {
-        console.log("CloudLink API v" + vers + ' | Now connecting to ' + WS);
-        wsstatus = ('Connecting to websocket server ' + WS);
-        return '\n';
-    }
-    ds() {
-        console.log("CloudLink API v" + vers + ' | Now closing connection... ');
-        wsstatus = ('Ready');
-        return;
-    }
-    isConnected() {
-        return connected;
-    }
-    set({DATA, VALUE}) {
-        return;
-    }
+}
+get({A}) {
+    return A;
+}
+rpStatus() {
+    return wsstatus;
+}
+cn({WS}) {
+    console.log("CloudLink API v" + vers + ' | Now connecting to ' + WS);
+    wsstatus = ('Connecting to websocket server ' + WS);
+    return '\n';
+}
+ds() {
+    console.log("CloudLink API v" + vers + ' | Now closing connection... ');
+    wsstatus = ('Ready');
+    return;
+}
+isConnected() {
+    return connected;
+}
+set({DATA, VALUE}) {
+    return;
+}
 }
 Scratch.extensions.register(new cloudlink());
 console.log("CloudLink API v" + vers + " | Ready for your command (well, technically the code's command...)!");
