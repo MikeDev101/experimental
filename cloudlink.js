@@ -74,6 +74,7 @@ class cloudlink {
         {
           opcode: 'receivedData',
           blockType: Scratch.BlockType.EVENT,
+          isEdgeActivated: false,
           text: 'When I receive data',
         },
       ],
@@ -88,21 +89,21 @@ class cloudlink {
   cn({WS}) {
     console.log('Connecting to websocket server ' + WS);
     wsstatus = ('Connecting to websocket server ' + WS);
-    return;
+    return this.write(`M0 \n`);
   }
   ds() {
     console.log('Now closing connection');
     wsstatus = ('Ready');
-    return;
+    return this.write(`M0 \n`);
   }
   isConnected() {
     return connected;
   }
   set({DATA, VALUE}) {
-    return;
+    return this.write(`M0 \n`);
   }
   receivedData() {
-    return;
+    return this.write(`M0 \n`);
   }
 }
 console.log("MikeDEV's CloudLink API | Loaded version " + vers);
