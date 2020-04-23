@@ -17,7 +17,7 @@ class cloudlink {
           arguments: {
             A: {
               type: Scratch.ArgumentType.STRING,
-              defaultValue: '127.0.0.1:3000',
+              defaultValue: 'Insert an IP here.',
             },
           },
         },
@@ -25,6 +25,7 @@ class cloudlink {
     }
   }
   get({A}) {
+    console.log(A);
     return A;
   }
 }
