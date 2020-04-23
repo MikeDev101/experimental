@@ -97,14 +97,14 @@ class cloudlink {
 }
 
 get(args, util) {
-  	const A = args.A;
+    const A = args.A;
     return A;
 };
 rpStatus() {
     return wsstatus;
 };
 cn(args, util) {
-  	const WS = args.WS;
+    const WS = args.WS;
     const vers = args.vers;
     console.log("CloudLink API v" + vers + ' | Now connecting to ' + WS);
     wsstatus = ('Connecting to websocket server ' + WS);
@@ -112,7 +112,7 @@ cn(args, util) {
 };
 ds(args, util) {
     const CONNECTION = args.CONNECTION;
-  	const vers = args.vers;
+    const vers = args.vers;
     console.log("CloudLink API v" + vers + ' | Now closing connection ' + CONNECTION + '... ');
     wsstatus = ('Ready');
     return;
