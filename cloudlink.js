@@ -111,8 +111,8 @@ cn({WS}) {
     wsstatus = ('Connecting to websocket server ' + WS);
     return '\n';
 }
-ds() {
-    console.log("CloudLink API v" + vers + ' | Now closing connection... ');
+ds({CONNECTION}) {
+    console.log("CloudLink API v" + vers + ' | Now closing connection ' + CONNECTION + '... ');
     wsstatus = ('Ready');
     return;
 }
