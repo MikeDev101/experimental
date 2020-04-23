@@ -2,7 +2,7 @@ const icon = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAYAAACOEfKt
 
 const vers = '0.1.0';
 
-var wsstatus = null;
+var wsstatus = 'ready';
 
 class cloudlink {
   constructor() {}
