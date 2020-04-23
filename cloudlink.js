@@ -2,6 +2,7 @@ const icon = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAYAAACOEfKt
 
 const vers = '0.1.0';
 var wsstatus = 'Ready';
+var connected = false;
 
 class cloudlink {
   constructor(runtime, extensionId) {
@@ -35,20 +36,45 @@ class cloudlink {
           },
         },
         {
-          opcode: 'open',
+          opcode: 'set',
           blockType: Scratch.BlockType.COMMAND,
-          text: 'Open websocket connection to [WS]',
+          text: 'Set [DATA] to [VALUE]',
           arguments: {
-            WS: {
+            DATA: {
               type: Scratch.ArgumentType.STRING,
-              defaultValue: '127.0.0.1:3000',
+              defaultValue: 'data',
+            },
+            VALUE: {
+              type: Scratch.ArgumentType.STRING,
+              defaultValue: 'value',
             },
           },
         },
         {
-          opcode: 'close',
+          opcode: 'cn',
           blockType: Scratch.BlockType.COMMAND,
-          text: 'Close websocket connection',
+          text: 'Connect to [WS]',
+          arguments: {
+            WS: {
+              type: Scratch.ArgumentType.STRING,
+              defaultValue: 'localhost:3000',
+            },
+          },
+        },
+        {
+          opcode: 'ds',
+          blockType: Scratch.BlockType.COMMAND,
+          text: 'Disconnect',
+        },
+        {
+          opcode: 'isConnected',
+          blockType: Scratch.BlockType.BOOLEAN,
+          text: 'Connected?',
+        },
+        {
+          opcode: 'receivedData',
+          blockType: Scratch.BlockType.EVENT,
+          text: 'When I receive data',
         },
       ],
     }
@@ -59,14 +85,23 @@ class cloudlink {
   rpStatus() {
     return wsstatus;
   }
-  open({WS}) {
+  cn({WS}) {
     console.log('Connecting to websocket server ' + WS);
     wsstatus = ('Connecting to websocket server ' + WS);
     return;
   }
-  close() {
+  ds() {
     console.log('Now closing connection');
     wsstatus = ('Ready');
+    return;
+  }
+  isConnected() {
+    return connected;
+  }
+  set({DATA, VALUE}) {
+    return;
+  }
+  receivedData() {
     return;
   }
 }
