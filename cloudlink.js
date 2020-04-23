@@ -16,6 +16,11 @@ class cloudlink {
       blockIconURI: icon,
       blocks: [
         {
+          opcode: 'rpStatus',
+          blockType: Scratch.BlockType.REPORTER,
+          text: 'Report current API status',
+        },
+        {
           opcode: 'get',
           blockType: Scratch.BlockType.REPORTER,
           text: 'Get from websocket [A]',
@@ -25,11 +30,6 @@ class cloudlink {
               defaultValue: 'Insert an IP here.',
             },
           },
-        },
-        {
-          opcode: 'rpStatus',
-          blockType: Scratch.BlockType.REPORTER,
-          text: 'Report current API status',
         },
         {
           opcode: 'open',
