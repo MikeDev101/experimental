@@ -88,12 +88,6 @@ class cloudlink {
           blockType: Scratch.BlockType.COMMAND,
           text: 'Disconnect',
         },
-        {
-          opcode: 'receivedData',
-          blockType: Scratch.BlockType.EVENT,
-          isEdgeActivated: false,
-          text: 'When I receive data',
-        },
       ],
     }
   }
@@ -116,11 +110,8 @@ class cloudlink {
   isConnected() {
     return connected;
   }
-  receivedData() {
-    return '\n';
-  }
   set({DATA, VALUE}) {
-    receivedData();
+    return '\n';
   }
 }
 Scratch.extensions.register(new cloudlink());
