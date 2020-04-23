@@ -23,7 +23,7 @@ var connected = false;
 class cloudlink {
     constructor(runtime, extensionId) {
         this.isRunning = false;
-        this.socketData = "";
+        this.socket = "";
         this.runtime = runtime;
     }
     getInfo() {
@@ -107,12 +107,12 @@ cn(args, util) {
     wsstatus = ('Now connecting to ' + WS);
     this.socket = new WebSocket(WS);
     const self = this;
-    this.socket.onopen() = function(evt) {
+    socket.onopen() = function(evt) {
         self.isRunning = true;
         console.log("CloudLink API v" + vers + ' | Connected to ' + WS + '!');
         wsstatus = ('Connected to ' + WS);
     }
-    this.socket.onerror() = function(evt) {
+    socket.onerror() = function(evt) {
         self.isRunning = false;
         console.log("CloudLink API v" + vers + ' | Error connecting to ' + WS + '!');
         wsstatus = ('Error connecting to ' + WS);
@@ -124,7 +124,7 @@ ds(args, util) {
     if (this.isRunning == true) {
         console.log("CloudLink API v" + vers + ' | Now closing connection to ' + CONNECTION + '...');
         wsstatus = ('Now closing connection to ' + CONNECTION + '...');
-        this.socket.close(1000, 'disconnected by script');
+        socket.close(1000, 'disconnected by script');
         this.isRunning = false;
         wsstatus = ('Ready');
         return 'OK';
