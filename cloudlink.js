@@ -88,15 +88,10 @@ class cloudlink {
                 arguments: {
                     CONNECTION: {
                         type: Scratch.ArgumentType.NUMBER,
-                        menu: fooBar,
+                        defaultValue: 'Some IP',
                     },
                 },
-            }],
-            menus: {
-                fooBar: {
-                    items: ["owo"],
-                }
-            };
+            }]
         }
     }
 }
@@ -124,4 +119,4 @@ set({DATA, VALUE}) {
 }
 }
 Scratch.extensions.register(new cloudlink());
-console.log("CloudLink API v" + vers + " | Ready for your command (well, technically the code's command...)!");
+console.log("CloudLink API v" + vers + " | Ready for your command!");
