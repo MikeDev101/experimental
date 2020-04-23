@@ -109,7 +109,7 @@ cn(args, util) {
 }
 ds(args, util) {
     const CONNECTION = args.CONNECTION;
-    console.log("CloudLink API v" + vers + ' | Now closing connection ' + CONNECTION + '...');
+    console.log("CloudLink API v" + vers + ' | Now closing connection to ' + CONNECTION + '...');
     wsstatus = ('Ready');
     return;
 }
@@ -122,4 +122,4 @@ set(args, util) {
 };
 
 Scratch.extensions.register(new cloudlink());
-console.log("CloudLink API v" + vers + " | Ready for your command!");
+console.log("CloudLink API v" + vers + " | Ready!");
