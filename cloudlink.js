@@ -105,7 +105,7 @@ cn(args, util) {
     const WS = args.WS;
     console.log("CloudLink API v" + vers + ' | Now connecting to ' + WS);
     wsstatus = ('Connecting to websocket server ' + WS);
-    return '\n';
+    return;
 }
 ds(args, util) {
     const CONNECTION = args.CONNECTION;
