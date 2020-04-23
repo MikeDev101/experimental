@@ -105,13 +105,13 @@ class cloudlink {
   ds() {
     console.log("CloudLink API v" + vers + ' | Now closing connection... ');
     wsstatus = ('Ready');
-    return '\n';
+    return;
   }
   isConnected() {
     return connected;
   }
   set({DATA, VALUE}) {
-    return '\n';
+    return;
   }
 }
 Scratch.extensions.register(new cloudlink());
