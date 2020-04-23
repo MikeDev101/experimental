@@ -103,14 +103,12 @@ rpStatus() {
 };
 cn(args, util) {
     const WS = args.WS;
-    const vers = args.vers;
     console.log("CloudLink API v" + vers + ' | Now connecting to ' + WS);
     wsstatus = ('Connecting to websocket server ' + WS);
     return '\n';
 };
 ds(args, util) {
     const CONNECTION = args.CONNECTION;
-    const vers = args.vers;
     console.log("CloudLink API v" + vers + ' | Now closing connection ' + CONNECTION + '... ');
     wsstatus = ('Ready');
     return;
