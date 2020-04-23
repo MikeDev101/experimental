@@ -77,7 +77,7 @@ class cloudlink {
                 arguments: {
                     WS: {
                         type: Scratch.ArgumentType.STRING,
-                        defaultValue: 'Some IP',
+                        defaultValue: '127.0.0.1:3000',
                     },
                 },
             },
@@ -87,8 +87,8 @@ class cloudlink {
                 text: 'Disconnect from [CONNECTION]',
                 arguments: {
                     CONNECTION: {
-                        type: Scratch.ArgumentType.NUMBER,
-                        defaultValue: 'Some IP',
+                        type: Scratch.ArgumentType.STRING,
+                        defaultValue: '127.0.0.1:3000',
                     },
                 },
             }]
@@ -105,12 +105,15 @@ cn(args, util) {
     const WS = args.WS;
     console.log("CloudLink API v" + vers + ' | Now connecting to ' + WS + '...');
     wsstatus = ('Now connecting to ' + WS);
-    let socket = new WebSocket(WS);
-    socket.onopen() = function(evt) {
+    this.socket = new WebSocket(WS);
+    const self = this;
+    this.socket.onopen() = function(evt) {
+        self.isRunning = true;
         console.log("CloudLink API v" + vers + ' | Connected to ' + WS + '!');
         wsstatus = ('Connected to ' + WS);
     }
-    socket.onerror() = function(evt) {
+    this.socket.onerror() = function(evt) {
+        self.isRunning = false;
         console.log("CloudLink API v" + vers + ' | Error connecting to ' + WS + '!');
         wsstatus = ('Error connecting to ' + WS);
     }
@@ -118,9 +121,19 @@ cn(args, util) {
 }
 ds(args, util) {
     const CONNECTION = args.CONNECTION;
-    console.log("CloudLink API v" + vers + ' | Now closing connection to ' + CONNECTION + '...');
-    wsstatus = ('Ready');
-    return;
+    if (this.isRunning == true) {
+        console.log("CloudLink API v" + vers + ' | Now closing connection to ' + CONNECTION + '...');
+        wsstatus = ('Now closing connection to ' + CONNECTION + '...');
+        this.socket.close(1000, 'disconnected by script');
+        this.isRunning = false;
+        wsstatus = ('Ready');
+        return 'OK';
+    }
+    else {
+        console.log("CloudLink API v" + vers + ' | Attempted to close connection, but not open, so there is nothing to do...');
+        wsstatus = ('Ready');
+    }
+    
 }
 isConnected() {
     return connected;
