@@ -55,25 +55,27 @@ class cloudlink {
       ],
     }
   }
-  connectToServer({url}) {
+  connectToServer(args) {
     const self = this;
-    const WS = url;
-    self.systemStatus = "Connecting to server: '" + url + "'";
+    self.systemStatus = "Connecting to server";
+    const url = args.url;
     if (this.isLinked == false) {
-      this.mWS = new WebSocket(WS);
+      const self = this;
+      this.mWS = new WebSocket(url);
       this.mWS.onerror = function() {
         self.isLinked = false;
         self.systemStatus = "Failed to connect";
       };
-      this.mWS.onopen = function(){
-        self.isLinked = true;
-      }
+    };
+    this.mWS.onopen = function(){
+      const self = this;
+      self.isLinked = true;
     }
   }
   transmitData({A}) {
     const self = this;
     self.socketData = A;
-    self.systemStatus = "Transmitting data: '" + A + "'";
+    self.systemStatus = "Transmitting data";
     return A;
   }
   getData() {
