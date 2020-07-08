@@ -63,7 +63,7 @@ class test {
     const self = this;
     self.socketData = data;
     self.systemStatus = "Transmitting data";
-    return;
+    return data;
   }
   getData() {
     return this.socketData;
