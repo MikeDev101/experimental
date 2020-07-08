@@ -71,8 +71,8 @@ class cloudlink {
         self.isLinked = true;
         self.systemStatus = "Connected";
       };
-    };
-    else {
+    }
+    else{
       const self = this;
       self.systemStatus = "Connected";
     };
