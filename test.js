@@ -25,9 +25,9 @@ class test {
           blockType: Scratch.BlockType.COMMAND,
           text: 'Connect to Server [url]',
           arguments: {
-            data: {
+            url: {
               type: Scratch.ArgumentType.STRING,
-              defaultValue: "ws://127.0.0.1:3000/",
+              defaultValue: 'ws://127.0.0.1:3000/',
             },
           },
         },
