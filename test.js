@@ -21,6 +21,16 @@ class cloudlink {
       blockIconURI: thumb,
       blocks: [
         {
+          opcode: 'getStatus',
+          blockType: Scratch.BlockType.REPORTER,
+          text: 'System Status',
+        },
+        {
+          opcode: 'getData',
+          blockType: Scratch.BlockType.REPORTER,
+          text: 'Data',
+        },
+        {
           opcode: 'connectToServer',
           blockType: Scratch.BlockType.COMMAND,
           text: 'Connect to Server [url]',
@@ -41,16 +51,6 @@ class cloudlink {
               defaultValue: 'Thing',
             },
           },
-        },
-        {
-          opcode: 'getData',
-          blockType: Scratch.BlockType.REPORTER,
-          text: 'Data',
-        },
-        {
-          opcode: 'getStatus',
-          blockType: Scratch.BlockType.REPORTER,
-          text: 'System Status',
         },
       ],
     }
