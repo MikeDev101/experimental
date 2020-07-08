@@ -39,7 +39,8 @@ class test {
     }
   }
   tx({ A }) {
-    this.data = A;
+    const self = this;
+    self.data = A;
     return A;
   }
   data() {
