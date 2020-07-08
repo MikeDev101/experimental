@@ -59,11 +59,11 @@ class test {
     const self = this;
     self.systemStatus = "Connecting to server";
   }
-  transmitData({data}) {
+  transmitData({A}) {
     const self = this;
-    self.socketData = data;
+    self.socketData = A;
     self.systemStatus = "Transmitting data";
-    return data;
+    return A;
   }
   getData() {
     return this.socketData;
