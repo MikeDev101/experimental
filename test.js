@@ -57,7 +57,18 @@ class cloudlink {
   }
   connectToServer({url}) {
     const self = this;
+    const WS = url;
     self.systemStatus = "Connecting to server: '" + url + "'";
+    if (this.isLinked == false) {
+      this.mWS = new WebSocket(WS);
+      this.mWS.onerror = function() {
+        self.isLinked = false;
+        self.systemStatus = "Failed to connect";
+      };
+      this.mWS.onopen = function(){
+        self.isLinked = true;
+      }
+    }
   }
   transmitData({A}) {
     const self = this;
