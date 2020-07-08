@@ -66,12 +66,12 @@ class cloudlink {
         self.isLinked = false;
         self.systemStatus = "Failed to connect";
       };
+      this.mWS.onopen = function(){
+        const self = this;
+        self.isLinked = true;
+        self.systemStatus = "Connected";
+      };
     };
-    this.mWS.onopen = function(){
-      const self = this;
-      self.isLinked = true;
-      self.systemStatus = "Connected";
-    }
   }
   transmitData({A}) {
     const self = this;
