@@ -70,6 +70,7 @@ class cloudlink {
     this.mWS.onopen = function(){
       const self = this;
       self.isLinked = true;
+      self.systemStatus = "Connected";
     }
   }
   transmitData({A}) {
