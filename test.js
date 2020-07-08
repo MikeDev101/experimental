@@ -5,6 +5,7 @@ class test {
     this.isLinked = false;
     this.runtime = runtime;
     this.socketData = "";
+    this.systemStatus = "";
   }
   static get STATE_KEY() {
     return 'Scratch.websockets';
@@ -19,6 +20,17 @@ class test {
       menuIconURI: thumb,
       blockIconURI: thumb,
       blocks: [
+        {
+          opcode: 'connectToServer',
+          blockType: Scratch.BlockType.COMMAND,
+          text: 'Connect to Server [url]',
+          arguments: {
+            data: {
+              type: Scratch.ArgumentType.STRING,
+              defaultValue: 'ws://127.0.0.1:3000/',
+            },
+          },
+        },
         {
           opcode: 'transmitData',
           blockType: Scratch.BlockType.COMMAND,
@@ -35,16 +47,28 @@ class test {
           blockType: Scratch.BlockType.REPORTER,
           text: 'Data',
         },
+        {
+          opcode: 'getStatus',
+          blockType: Scratch.BlockType.REPORTER,
+          text: 'System Status',
+        },
       ],
     }
   }
-  transmitData({A}) {
+  connectToServer({url}) {
     const self = this;
-    self.socketData = A;
-    return A;
+    self.systemStatus = "Connecting to server";
+  }
+  transmitData({data}) {
+    const self = this;
+    self.socketData = data;
+    self.systemStatus = "Transmitting data";
   }
   getData() {
     return this.socketData;
+  }
+  getStatus() {
+    return this.systemStatus;
   }
 }
 Scratch.extensions.register(new test())
