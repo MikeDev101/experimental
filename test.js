@@ -13,9 +13,9 @@ class test {
     return {
       id: 'test',
       name: 'test',
-      color1: '#00daee',
-      color2: '#00daee',
-      color3: '#00747f',
+      color1: '#054c63',
+      color2: '#054c63',
+      color3: '#043444',
       menuIconURI: thumb,
       blockIconURI: thumb,
       blocks: [
