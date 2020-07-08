@@ -39,10 +39,11 @@ class test {
     }
   }
   tx({ A }) {
-    return A
+    this.data = A;
+    return A;
   }
   data() {
-    return this.data
+    return this.data;
   }
 }
 Scratch.extensions.register(new test())
