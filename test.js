@@ -2,9 +2,9 @@ const thumb = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAYAAACOEfK
 
 class test {
   constructor(runtime, extensionid) {
-    this.linked = false;
+    this.isLinked = false;
     this.runtime = runtime;
-    this.data = "";
+    this.socketData = "";
   }
   static get STATE_KEY() {
     return 'Scratch.websockets';
@@ -20,7 +20,7 @@ class test {
       blockIconURI: thumb,
       blocks: [
         {
-          opcode: 'tx',
+          opcode: 'transmitData',
           blockType: Scratch.BlockType.COMMAND,
           text: 'Transmit [A]',
           arguments: {
@@ -31,20 +31,20 @@ class test {
           },
         },
         {
-          opcode: 'data',
+          opcode: 'getData',
           blockType: Scratch.BlockType.REPORTER,
           text: 'Data',
         },
       ],
     }
   }
-  tx({ A }) {
+  transmitData({A}) {
     const self = this;
-    self.data = A;
+    self.socketData = A;
     return A;
   }
-  data() {
-    return this.data;
+  getData() {
+    return this.socketData;
   }
 }
 Scratch.extensions.register(new test())
