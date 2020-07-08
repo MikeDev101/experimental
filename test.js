@@ -27,7 +27,7 @@ class test {
           arguments: {
             data: {
               type: Scratch.ArgumentType.STRING,
-              defaultValue: 'ws://127.0.0.1:3000/',
+              defaultValue: "ws://127.0.0.1:3000/",
             },
           },
         },
@@ -63,6 +63,7 @@ class test {
     const self = this;
     self.socketData = data;
     self.systemStatus = "Transmitting data";
+    return;
   }
   getData() {
     return this.socketData;
