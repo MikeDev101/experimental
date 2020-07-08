@@ -72,6 +72,10 @@ class cloudlink {
         self.systemStatus = "Connected";
       };
     };
+    else {
+      const self = this;
+      self.systemStatus = "Connected";
+    };
   }
   transmitData({A}) {
     const self = this;
