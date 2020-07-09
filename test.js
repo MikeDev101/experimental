@@ -12,6 +12,7 @@ const menuIconURI = blockIconURI;
 class cloudlink{
     constructor (runtime, extensionId) {
         this.isRunning = false;
+        this.updaterRunning = false;
 	this.runtime = runtime;
         this.socketData = "";
     }
@@ -87,6 +88,12 @@ class cloudlink{
     		this.mWS.onopen = function(){
     			self.isRunning = true;
     			console.log("CloudLink API v" + vers + " | Connected to socket successfully.");
+                        function executeAsync(func) {
+                                setTimeout(func, 0);
+                        };
+                        executeAsync(function() {
+                                alert("Testing...");
+                        });
     		}
     	}
     	else{
