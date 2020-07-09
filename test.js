@@ -11,7 +11,6 @@ const menuIconURI = blockIconURI;
 class cloudlink {
     constructor(runtime, extensionId) {
         this.isRunning = false;
-        this.updaterRunning = false;
         this.runtime = runtime;
         this.socketData = "";
     }
@@ -55,7 +54,7 @@ class cloudlink {
                     text: 'Disconnect from server',
                 },
                 {
-                    opcode: 'sendDataGlobalStream',
+                    opcode: 'sendData',
                     blockType: Scratch.BlockType.COMMAND,
                     text: 'Send [DATA] through global stream',
                     arguments: {
@@ -65,90 +64,29 @@ class cloudlink {
                         },
                     },
                 },
-                {
-                    opcode: 'fetchDataGlobalSteam',
-                    blockType: Scratch.BlockType.COMMAND,
-                    text: 'Fetch data from global stream',
-                },
             ],
         };
     }
     openSocket(args) {
-        const WSS = args.WSS;
-        if (this.isRunning == false) {
-            console.log("CloudLink API v" + vers + " | Opening socket...");
-            this.mWS = new WebSocket(WSS);
-            const self = this;
-            this.mWS.onerror = function() {
-                self.isRunning = false;
-                console.log("CloudLink API v" + vers + " | Failed to connect to socket.");
-            };
-            this.mWS.onopen = function() {
-                self.isRunning = true;
-                console.log("CloudLink API v" + vers + " | Connected to socket successfully.");
-            }
-        } else {
-            console.log("CloudLink API v" + vers + " | Socket already open, no action taken.");
-            return "Socket already open, no action taken.";
-        }
+        return;
     }
 
     closeSocket() {
-        if (this.isRunning == true) {
-            console.log("CloudLink API v" + vers + " | Closing socket...");
-            self.updaterRunning = false;
-            this.mWS.close(1000);
-            console.log("CloudLink API v" + vers + " | Socket closed successfully.");
-            this.isRunning = false;
-            return "Socket closed successfully.";
-        } else {
-            console.log("CloudLink API v" + vers + " | Attempted to close socket, but socket already closed.");
-            return "Socket already closed, no action taken.";
-        }
+        return;
     }
 
     getSocketState() {
-        if (this.isRunning) {
-            var response = this.mWS.readyState;
-            if (response == 2 || response == 3) {
-                this.isRunning = false;
-                console.log("CloudLink API v" + vers + " | Socket closed unexpectedly.")
-            }
-        }
-        return this.isRunning;
+        return;
     }
 
-    sendDataGlobalStream(args) {
-        if (this.isRunning == true) {
-            this.mWS.send('@a\n' + args.DATA);
-            return "Sent data successfully.";
-        } else {
-            return "Socket not open, no action taken.";
-        }
-    }
-
-    fetchDataGlobalSteam(args) {
-        if (this.isRunning == true) {
-            this.mWS.send("%_fetch\n@a");
-            const self = this;
-            //Load response
-            var message = this.mWS.onmessage = function(event) {
-                var tmp = String(event.data);
-                self.socketData = tmp.slice(1, -1)
-            };
-        } else {
-            return "Socket not open, no action taken.";
-        }
+    sendData(args) {
+        return;
     }
 
     getSocketData() {
-        return this.socketData;
+        return;
     }
     
-    this.mWS.onmessage = function(event) {
-        var tmp = String(event.data);
-        self.socketData = tmp.slice(1, -1)
-    }
 }
 
 Scratch.extensions.register(new cloudlink());
