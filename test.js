@@ -98,9 +98,9 @@ class cloudlink {
         if (isRunning == true) {
             this.wss.close(1000);
             isRunning = false;
-            return "Connection closed.");
+            return ("Connection closed.");
         } else {
-            return "Connection already closed.");
+            return ("Connection already closed.");
         };
     }
 
