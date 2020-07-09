@@ -93,9 +93,8 @@ class cloudlink{
                                 setTimeout(func, 0);
                         };
                         executeAsync(function () {
-                                while (this.updaterRunning == true) {
+                                while (true) {
                                         console.log("Testing...");
-                                        sleep(1000);
                                 };
                         });
     		}
