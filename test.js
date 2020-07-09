@@ -1,19 +1,18 @@
 // MikeDEV's CloudLink API
-// Version 0.1.7 - Built upon KingdomPi's Scratch-websockets repo.
+// Version 0.1.8 - Built upon KingdomPi's Scratch-websockets repo.
 // See https://github.com/KingdomPy/scratch_websockets/blob/master/index.js for the original script!
 // DO NOT USE ON OLDER WEB BROWSERS! CloudLink is designed to run best on a modern web browser.
-const vers = '0.1.9';
+const vers = '0.1.8';
 
 const blockIconURI = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAYAAACOEfKtAAAE9ElEQVR4Xu2aS4gcVRSGv9MOjSJowI0RRONODDKj0tUDMzgjggohKgRFETIRcaUwoqAIkkR04QMi6saFzEhIBAMad7rK+JyujpCIoBsfCcTHMiIIMdpHqh+T6Zl6dZ3qeYRzl133P3Xq6//ec++tEryZCIhJ7WIcoNEEDtABGgkY5e5AB2gkYJS7Ax2gkYBR7g50gEYCRrk70AEaCRjl7kAHaCRglLsDHaCRgFHuDnSARgJGuTvQARoJGOXuQAdoJGCUuwM3BMATuoVzHECY6eZzEmEPNTlpzK88eaj3Abu7Ad8jkKNlBLc7MIL3D8eA0RUJnUWY3hAQQ51fBq+X5j4C2W+FaAOYDK+Tl7BATaatSZr0DZ1FOBAbQ5mnLnss8YsDzILXyyqQ4vewPFlPG+op4LrEUEaIxR4uLzz4k0C2lMGhcIxQNYd2P4Hsy9FvVZfBAeaHF92scGJFHiZWE2pULO7NjNcpetFcOVAbDOBg8D4jkKmBshlG507O0TC+MjN8AYj5AQ4G71uqTDEmZzOTXosOTR1FWRgGxHwANzO83h80JIj5AOadR2BjOW+lu4cAMRtg/CI0buBtbHhDcmI6wLLhhfowMAH8wggfcav8mDgFHtc7abETuLo9f40wz23yd2z/ht4M7KLCTcAiIxzmFvktMXaJTkwGWCa8pj6IMgdc1vdQwhvU5Km+3xp6BcIHwF19vyv/Ao9Sl4N9v4f6FvBEDKxnCeTVYUOMB1gmvON6Ay1+Sim2zxHIK0vXm/oOyuOJ/YWt1OSP9vVQnwTeTOyr3EFdon16fCvBiasBlgkvSruhryM8nbpa6W33mhoN199T+yp7qcuLXYBZu4wjBPJAajwjxH6A+eGdpspornVeqD8D2zKgTFKXLwn1IeBwxtIwJJA6i3ojFb7P6HuOQC7NXGo2daY7xWR27R7TLe1Y+gEaAqUMk19RrsnI7G4C+ZROkTmU2ldoUpOAr3Q7I3yXEfc8gVQzqXTWuSeA6zP7Rku1QJaO7lYP4bIhNnUOXTpojc/vEi5vV9hvdCv/kVw9O+oL++vsg4KjBHJ/JpRQo13K7Zn9Yta58UWkTIgNnUD4IiW5twkkKgadFuq77Wqb1JRrqcuZ9uWmPoPyWmJf4R5q8kkqmPzTVuw6N3kZUybEUF8Gno95kM85zw4m5K9lAK8CjgBxB7GPEUgE+EJr6EGER1bFVl6iLi8ME14UO30hPQjEFtOMSzQU4tvXOkaF3VSYRIkKy4cE8n5i/1B3oOyk0l5IH6PKXGLRCnUSYRfK9vZCusUhxuWHYcPLBtgZJnkr1MZ5B5I1mRmH7fLw2Xvhiw1iifDyObCH+2JwYsnwBgO42Z04BHiDA9ysEIcErxjAwSCeIpD0bVzWhG+9Hmr0tm1vjjCFzjPzFZG4u+edE4Wxdf06IXu3Ej1dIXjFHThIYWmxjXGJ3oqtfeuctER73LRWGJ4dYPZwXv9Xm6FGbwaTXmma4JUDMBniaVpMrZv7ep5b1Ckq7Y+fVjYzvPIARpE6ic52v9JaoMpsrvPCtRjYnU/bojO8nhM/pspMGfkVLyJr8eCb4B4O0PgnOUAHaCRglLsDHaCRgFHuDnSARgJGuTvQARoJGOXuQAdoJGCUuwMdoJGAUe4OdIBGAka5O9ABGgkY5e5AB2gkYJS7Ax2gkYBR7g50gEYCRvn/QEDeYP09rHoAAAAASUVORK5CYII=';
 const menuIconURI = blockIconURI;
 
-var sData = "";
-var isRunning = false; // Look, I know global variables is bad. But in this use case, it doesn't seem too bad to use. I'm just an ameteur programmer, let me try darnit.
-
 class cloudlink {
     constructor(runtime, extensionId) {
         this.runtime = runtime;
-        this.socketData = "";
+        this.sData = "";
+        this.isRunning = false;
+        this.status = "ready";
     }
 
     static get STATE_KEY() {
@@ -31,7 +30,12 @@ class cloudlink {
             blocks: [{
                     opcode: 'getData',
                     blockType: Scratch.BlockType.REPORTER,
-                    text: 'Data',
+                    text: 'Socket Data',
+                },
+                {
+                    opcode: 'getStatus',
+                    blockType: Scratch.BlockType.REPORTER,
+                    text: 'Status',
                 },
                 {
                     opcode: 'getSocketState',
@@ -70,12 +74,14 @@ class cloudlink {
     }
     openSocket(args) {
         const WSS = args.WSS;
-        if (isRunning == false) {
+        if (this.isRunning == false) {
             const self = this;
+            self.status = "connecting";
+            console.log("CloudLink API v" + vers + " | Attempting connection to server...");
             this.wss = new WebSocket(WSS);
-    
             this.wss.onopen = function(e) {
-                    isRunning = true;
+                    self.isRunning = true;
+                    self.status = "connected";
                     console.log("CloudLink API v" + vers + " | Connected to server.");
             };
             this.wss.onmessage = function(event) {
@@ -84,11 +90,13 @@ class cloudlink {
             };
             this.wss.onclose = function(event) {
                 if (event.wasClean) {
-                    isRunning = false;
-                    console.log("CloudLink API v" + vers + " | Server has been cleanly disconnected.");
+                    self.isRunning = false;
+                    self.status = "disconnected, OK";
+                    console.log("CloudLink API v" + vers + " | Server has been cleanly disconnected. :)");
                 } else {
-                    isRunning = false;
-                    console.log("CloudLink API v" + vers + " | Server disconnected: did the connection die?");
+                    self.isRunning = false;
+                    self.status = "disconnected, ERR";
+                    console.log("CloudLink API v" + vers + " | Server unexpectedly disconnected. :(");
                 };
             };
         } else {
@@ -97,9 +105,11 @@ class cloudlink {
     }
 
     closeSocket() {
-        if (isRunning == true) {
+        const self = this;
+        if (this.isRunning == true) {
             this.wss.close(1000);
-            isRunning = false;
+            self.isRunning = false;
+            self.status = "disconnected, OK";
             return ("Connection closed.");
         } else {
             return ("Connection already closed.");
@@ -111,7 +121,7 @@ class cloudlink {
     }
 
     sendData(args) {
-   		if (isRunning == true) {
+   		if (this.isRunning == true) {
    			this.wss.send(args.DATA);
 			return "Sent data successfully.";
    		}
@@ -121,7 +131,7 @@ class cloudlink {
     }
 
     getData() {
-        return sData;
+        return this.sData;
     }
     
 }
