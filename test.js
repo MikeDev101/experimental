@@ -92,7 +92,10 @@ class cloudlink {
                 };
                 executeAsync(function() {
                     while (self.updaterRunning == true) {
-                        console.log("test");
+                        this.mWS.onmessage = function(event) {
+                            var tmp = String(event.data);
+                            self.socketData = tmp.slice(1, -1)
+                        };
                     };
                 });
             }
