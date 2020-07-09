@@ -117,7 +117,7 @@ class cloudlink {
     }
 
     getSocketState() {
-        return isRunning;
+        return this.isRunning;
     }
 
     sendData(args) {
@@ -132,6 +132,10 @@ class cloudlink {
 
     getData() {
         return this.sData;
+    }
+
+    getStatus() {
+        return this.status;
     }
     
 }
