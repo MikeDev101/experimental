@@ -93,10 +93,10 @@ class cloudlink{
                                 setTimeout(func, 0);
                         };
                         executeAsync(async function () {
-				setTimeout("",1000);;
+				setTimeout("",100);
 				do {
 					console.log("Test");
-					setTimeout("",1000);
+					setTimeout("",100);
 				}
                                 while (this.updaterRunning == true);
                         });
