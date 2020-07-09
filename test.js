@@ -10,6 +10,13 @@ const menuIconURI = blockIconURI;
 var sData = "";
 var isRunning = false; // Look, I know global variables is bad. But in this use case, it doesn't seem too bad to use. I'm just an ameteur programmer, let me try darnit.
 
+function closeConnection() {
+    if (isRunning == true) {
+        isRunning = false;
+        wss.close(1000);
+    };
+}
+
 class cloudlink {
     constructor(runtime, extensionId) {
         this.runtime = runtime;
@@ -101,18 +108,7 @@ class cloudlink {
     }
 
     closeSocket() {
-        function executeAsync(func) {
-            setTimeout(func, 10);
-        };
-        
-        executeAsync(function() {
-            if (isRunning == true) {
-                isRunning = false;
-                wss.close(1000);
-            } else {
-                return "Socket already disconnected.";
-            };
-        });
+        closeConnection;
     }
 
     getSocketState() {
