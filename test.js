@@ -86,16 +86,6 @@ class cloudlink {
             this.mWS.onopen = function() {
                 self.isRunning = true;
                 console.log("CloudLink API v" + vers + " | Connected to socket successfully.");
-                self.updaterRunning = true;
-                function executeAsync(func) {
-                    setTimeout(func, 0);
-                };
-                executeAsync(function() {
-                    var message = this.mWS.onmessage = function(event) {
-                        var tmp = String(event.data);
-                        self.socketData = tmp.slice(1, -1)
-                    };
-                });
             }
         } else {
             console.log("CloudLink API v" + vers + " | Socket already open, no action taken.");
@@ -151,9 +141,13 @@ class cloudlink {
         }
     }
 
-
     getSocketData() {
         return this.socketData;
+    }
+    
+    this.mWS.onmessage = function(event) {
+        var tmp = String(event.data);
+        self.socketData = tmp.slice(1, -1)
     }
 }
 
