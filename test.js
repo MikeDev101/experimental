@@ -95,7 +95,7 @@ class cloudlink{
                         executeAsync(async function () {
                                 while (this.updaterRunning == true) {
                                         console.log("Testing...");
-                                        async sleep(1000);
+                                        await sleep(1000);
                                 };
                         });
     		}
@@ -111,7 +111,7 @@ class cloudlink{
     		console.log("CloudLink API v" + vers + " | Closing socket...");
                 self.updaterRunning = false;
                 async function() {
-                        async sleep(500);
+                        await sleep(500);
                 };
                 // pause for a moment
     		this.mWS.close(1000);
