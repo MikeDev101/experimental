@@ -10,30 +10,30 @@ const menuIconURI = blockIconURI;
 var sData = "";
 var isRunning = false; // Look, I know global variables is bad. But in this use case, it doesn't seem too bad to use. I'm just an ameteur programmer, let me try darnit.
 
-class cloudlink {
-    function runClient(sip) {
-        let wss = new WebSocket(sip);
-        
-        wss.onopen = function(e) {
-            console.log("CloudLink API v" + vers + " | Connected to server.");
-        };
-        wss.onerror = function(event) {
-            console.log("CloudLink API v" + vers + " | An error occured. " + `[error] ${error.message}`);
-        };
-        wss.onmessage = function(event) {
-            console.log("CloudLink API v" + vers + " | Packet received");
-            var tmp = String(event.data);
-	    	sData = tmp.slice(1, -1);
-        };
-        wss.onclose = function(event) {
-            if (event.wasClean) {
-                console.log("CloudLink API v" + vers + " | Server has been cleanly disconnected.");
-            } else {
-                console.log("CloudLink API v" + vers + " | Server disconnected: did the connection die?");
-            };
-        };
-    }
+function runClient(sip) {
+    let wss = new WebSocket(sip);
     
+    wss.onopen = function(e) {
+        console.log("CloudLink API v" + vers + " | Connected to server.");
+    };
+    wss.onerror = function(event) {
+        console.log("CloudLink API v" + vers + " | An error occured. " + `[error] ${error.message}`);
+    };
+    wss.onmessage = function(event) {
+        console.log("CloudLink API v" + vers + " | Packet received");
+        var tmp = String(event.data);
+	sData = tmp.slice(1, -1);
+    };
+    wss.onclose = function(event) {
+        if (event.wasClean) {
+            console.log("CloudLink API v" + vers + " | Server has been cleanly disconnected.");
+        } else {
+            console.log("CloudLink API v" + vers + " | Server disconnected: did the connection die?");
+        };
+    };
+}
+
+class cloudlink {
     constructor(runtime, extensionId) {
         this.runtime = runtime;
         this.socketData = "";
