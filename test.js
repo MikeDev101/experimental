@@ -86,7 +86,7 @@ class cloudlink {
             };
             this.wss.onmessage = function(event) {
                 var tmp = String(event.data);
-                sData = tmp.slice(1, -1);
+                self.sData = tmp.slice(1, -1);
             };
             this.wss.onclose = function(event) {
                 if (event.wasClean) {
