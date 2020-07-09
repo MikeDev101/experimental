@@ -134,7 +134,6 @@ class cloudlink{
    		if (this.isRunning == true) {
    			this.mWS.send("%_fetch\n@a");
    			const self = this;
-			self.socketData = "";
    			//Load response
    			var message = this.mWS.onmessage = function(event){
    				var tmp = String(event.data);
