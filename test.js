@@ -87,16 +87,13 @@ class cloudlink {
                 self.isRunning = true;
                 console.log("CloudLink API v" + vers + " | Connected to socket successfully.");
                 self.updaterRunning = true;
-
                 function executeAsync(func) {
                     setTimeout(func, 0);
                 };
                 executeAsync(function() {
-                    setTimeout("", 1000);
-                    do {
-                        setTimeout((function() {console.log("Test")}), 1000);
-                    }
-                    while (this.updaterRunning == true);
+                    while (self.updaterRunning == true) {
+                        console.log("test");
+                    };
                 });
             }
         } else {
