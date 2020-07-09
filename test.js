@@ -30,17 +30,17 @@ class cloudlink {
             blocks: [{
                     opcode: 'getSocketData',
                     blockType: Scratch.BlockType.REPORTER,
-                    text: 'Socket data',
+                    text: 'Data',
                 },
                 {
                     opcode: 'getSocketState',
                     blockType: Scratch.BlockType.BOOLEAN,
-                    text: 'Is the socket connected?',
+                    text: 'Connected?',
                 },
                 {
                     opcode: 'openSocket',
                     blockType: Scratch.BlockType.COMMAND,
-                    text: 'Connect to server [WSS]',
+                    text: 'Connect to [WSS]',
                     arguments: {
                         WSS: {
                             type: Scratch.ArgumentType.STRING,
@@ -51,12 +51,12 @@ class cloudlink {
                 {
                     opcode: 'closeSocket',
                     blockType: Scratch.BlockType.COMMAND,
-                    text: 'Disconnect from server',
+                    text: 'Disconnect',
                 },
                 {
                     opcode: 'sendData',
                     blockType: Scratch.BlockType.COMMAND,
-                    text: 'Send [DATA] through global stream',
+                    text: 'Send [DATA]',
                     arguments: {
                         DATA: {
                             type: Scratch.ArgumentType.STRING,
