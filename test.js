@@ -87,20 +87,23 @@ class cloudlink {
             let wss = new WebSocket(WSS);
     
             wss.onopen = function(e) {
+		    isRunning = true;
                     console.log("CloudLink API v" + vers + " | Connected to server.");
             };
-            wss.onerror = function(event) {
+            wss.onerror = function(error) {
+		    isRunning = false;
                     console.log("CloudLink API v" + vers + " | An error occured. " + `[error] ${error.message}`);
             };
             wss.onmessage = function(event) {
-                console.log("CloudLink API v" + vers + " | Packet received");
                 var tmp = String(event.data);
 	            sData = tmp.slice(1, -1);
             };
             wss.onclose = function(event) {
                 if (event.wasClean) {
+                    isRunning = false;
                     console.log("CloudLink API v" + vers + " | Server has been cleanly disconnected.");
                 } else {
+                    isRunning = false;
                     console.log("CloudLink API v" + vers + " | Server disconnected: did the connection die?");
                 };
             };
