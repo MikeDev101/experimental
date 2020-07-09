@@ -91,11 +91,9 @@ class cloudlink {
                     setTimeout(func, 0);
                 };
                 executeAsync(function() {
-                    while (self.updaterRunning == true) {
-                        this.mWS.onmessage = function(event) {
-                            var tmp = String(event.data);
-                            self.socketData = tmp.slice(1, -1)
-                        };
+                    var message = this.mWS.onmessage = function(event) {
+                        var tmp = String(event.data);
+                        self.socketData = tmp.slice(1, -1)
                     };
                 });
             }
