@@ -111,7 +111,13 @@ class cloudlink {
     }
 
     sendData(args) {
-        return;
+   		if (isRunning == true) {
+   			this.wss.send('@a\n' + args.DATA);
+			return "Sent data successfully.";
+   		}
+		else {
+			return "Connection closed, no action taken.";
+		}
     }
 
     getData() {
