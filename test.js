@@ -84,7 +84,7 @@ class cloudlink {
             setTimeout(func, 10);
         };
         executeAsync(function (){
-            let wss = new WebSocket(sip);
+            let wss = new WebSocket(WSS);
     
             wss.onopen = function(e) {
                     console.log("CloudLink API v" + vers + " | Connected to server.");
