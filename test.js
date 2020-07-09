@@ -110,7 +110,8 @@ class cloudlink {
                 isRunning = false;
                 wss.close(1000);
             } else {
-                console.log("CloudLink API v" + vers + " | Already disconnected from server.");
+                return "Socket already disconnected.";
+            };
         });
     }
 
