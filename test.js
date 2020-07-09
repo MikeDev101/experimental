@@ -112,7 +112,7 @@ class cloudlink {
 
     sendData(args) {
    		if (isRunning == true) {
-   			this.wss.send('@a\n' + args.DATA);
+   			this.wss.send(args.DATA);
 			return "Sent data successfully.";
    		}
 		else {
