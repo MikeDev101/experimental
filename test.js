@@ -73,7 +73,6 @@ class cloudlink{
                     blockType: Scratch.BlockType.COMMAND,
                     text: 'Fetch data from global stream',
                 },
-		{
             ],
         };
     }
