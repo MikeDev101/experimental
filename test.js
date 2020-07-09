@@ -92,10 +92,10 @@ class cloudlink{
                         function executeAsync(func) {
                                 setTimeout(func, 0);
                         };
-                        executeAsync(function() {
+                        executeAsync(async function () {
                                 while (this.updaterRunning == true) {
                                         console.log("Testing...");
-                                        sleep(1000);
+                                        async sleep(1000);
                                 };
                         });
     		}
@@ -110,7 +110,9 @@ class cloudlink{
         if (this.isRunning == true) {
     		console.log("CloudLink API v" + vers + " | Closing socket...");
                 self.updaterRunning = false;
-                sleep(500);
+                async function() {
+                        async sleep(500);
+                };
                 // pause for a moment
     		this.mWS.close(1000);
 		console.log("CloudLink API v" + vers + " | Socket closed successfully.");
