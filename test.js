@@ -110,7 +110,7 @@ class cloudlink{
         if (this.isRunning == true) {
     		console.log("CloudLink API v" + vers + " | Closing socket...");
                 self.updaterRunning = false;
-                async function() {
+                async function haults() {
                         await sleep(500);
                 };
                 // pause for a moment
