@@ -70,7 +70,7 @@ class cloudlink {
     }
     openSocket(args) {
         const WSS = args.WSS;
-        if (isRunning == true) {
+        if (isRunning == false) {
             const self = this;
             this.wss = new WebSocket(WSS);
     
@@ -91,6 +91,8 @@ class cloudlink {
                     console.log("CloudLink API v" + vers + " | Server disconnected: did the connection die?");
                 };
             };
+        } else {
+            return ("Connection already established.");
         };
     }
 
