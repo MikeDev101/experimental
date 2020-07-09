@@ -10,7 +10,7 @@ const menuIconURI = blockIconURI;
 var sData = "";
 var isRunning = false; // Look, I know global variables is bad. But in this use case, it doesn't seem too bad to use. I'm just an ameteur programmer, let me try darnit.
 
-function runClient(sip) {
+function wsClient() {
     let wss = new WebSocket(sip);
     
     wss.onopen = function(e) {
@@ -31,6 +31,16 @@ function runClient(sip) {
             console.log("CloudLink API v" + vers + " | Server disconnected: did the connection die?");
         };
     };
+}
+
+function wsClose() {
+	if (isRunning == true) {
+		isRunning = false;
+		wss.close(1000);
+		console.log("CloudLink API v" + vers + " | Disconnected from server.");
+	} else {
+		console.log("CloudLink API v" + vers + " | Already disconnected from server.");
+	};
 }
 
 class cloudlink {
@@ -92,11 +102,12 @@ class cloudlink {
         };
     }
     openSocket(args) {
-        return;
+        const WSS = args.WSS;
+	wsClient(WSS);
     }
 
     closeSocket() {
-        return;
+        wsClose();
     }
 
     getSocketState() {
