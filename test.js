@@ -10,13 +10,6 @@ const menuIconURI = blockIconURI;
 var sData = "";
 var isRunning = false; // Look, I know global variables is bad. But in this use case, it doesn't seem too bad to use. I'm just an ameteur programmer, let me try darnit.
 
-function closeConnection() {
-    if (isRunning == true) {
-        isRunning = false;
-        wss.close(1000);
-    };
-}
-
 class cloudlink {
     constructor(runtime, extensionId) {
         this.runtime = runtime;
@@ -77,25 +70,19 @@ class cloudlink {
     }
     openSocket(args) {
         const WSS = args.WSS;
-        function executeAsync(func) {
-            setTimeout(func, 10);
-        };
-        executeAsync(function (){
-            let wss = new WebSocket(WSS);
+        if (isRunning == true) {
+            const self = this;
+            this.wss = new WebSocket(WSS);
     
-            wss.onopen = function(e) {
-		    isRunning = true;
+            this.wss.onopen = function(e) {
+                    isRunning = true;
                     console.log("CloudLink API v" + vers + " | Connected to server.");
             };
-            wss.onerror = function(error) {
-		    isRunning = false;
-                    console.log("CloudLink API v" + vers + " | An error occured. " + `[error] ${error.message}`);
-            };
-            wss.onmessage = function(event) {
+            this.wss.onmessage = function(event) {
                 var tmp = String(event.data);
-	            sData = tmp.slice(1, -1);
+                sData = tmp.slice(1, -1);
             };
-            wss.onclose = function(event) {
+            this.wss.onclose = function(event) {
                 if (event.wasClean) {
                     isRunning = false;
                     console.log("CloudLink API v" + vers + " | Server has been cleanly disconnected.");
@@ -104,11 +91,17 @@ class cloudlink {
                     console.log("CloudLink API v" + vers + " | Server disconnected: did the connection die?");
                 };
             };
-        });
+        };
     }
 
     closeSocket() {
-        closeConnection;
+        if (isRunning == true) {
+            this.wss.close(1000);
+            isRunning = false;
+            return "Connection closed.");
+        } else {
+            return "Connection already closed.");
+        };
     }
 
     getSocketState() {
