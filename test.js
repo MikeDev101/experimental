@@ -14,7 +14,7 @@ class cloudlink {
         this.sPData = "";
         this.isRunning = false;
         this.status = "Ready";
-        this.myName = null;
+        this.myName = "";
         this.userNames = "";
     }
 
@@ -124,13 +124,14 @@ class cloudlink {
             console.log("CloudLink API v" + vers + " | Attempting connection to server...");
             this.wss = new WebSocket(WSS);
             this.wss.onopen = function(e) {
-                    self.isRunning = true;
-                    self.status = "Connected";
-                    console.log("CloudLink API v" + vers + " | Connected to server.");
+                self.isRunning = true;
+                self.status = "Connected";
+                console.log("CloudLink API v" + vers + " | Connected to server.");
             };
             this.wss.onmessage = function(event) {
                 var tmp = String(event.data);
-                self.sGData = tmp.slice(1, -1);
+                var tmp2 = tmp.slice(1, -1)
+                self.sGData = tmp2;
             };
             this.wss.onclose = function(event) {
                 if (event.wasClean) {
@@ -154,7 +155,7 @@ class cloudlink {
             this.wss.send("<%ds>\n") // send disconnect command in header before shutting down link
             this.wss.close(1000);
             self.isRunning = false;
-            self.myName = null;
+            self.myName = "";
             self.userNames = "";
             self.status = "Disconnected, OK";
             return ("Connection closed.");
@@ -168,29 +169,27 @@ class cloudlink {
     }
 
     sendGData(args) {
-   		if (this.isRunning == true) {
-   			this.wss.send("<%gs>\n" + args.DATA); // begin packet data with global stream idenifier in the header
-			return "Sent data successfully.";
-   		}
-		else {
-			return "Connection closed, no action taken.";
-		}
+        if (this.isRunning == true) {
+            this.wss.send("<%gs>\n" + args.DATA); // begin packet data with global stream idenifier in the header
+            return "Sent data successfully.";
+        } else {
+            return "Connection closed, no action taken.";
+        }
     }
-    
+
     sendPData(args) {
         if (this.isRunning == true) {
-   			this.wss.send("<%ps>\n" + args.ID + "\n" + args.DATA); // begin packet data with global stream idenifier in the header
-			return "Sent data successfully.";
-   		}
-		else {
-			return "Connection closed, no action taken.";
-		}
+            this.wss.send("<%ps>\n" + args.ID + "\n" + args.DATA); // begin packet data with global stream idenifier in the header
+            return "Sent data successfully.";
+        } else {
+            return "Connection closed, no action taken.";
+        }
     }
 
     getGData() {
         return this.sGData;
     }
-    
+
     getPData() {
         return this.sPData;
     }
@@ -198,31 +197,29 @@ class cloudlink {
     getStatus() {
         return this.status;
     }
-    
+
     getCNames() {
         return this.userNames;
     }
-    
+
     getMyName() {
         return this.myName;
     }
-    
+
     setMyName(args) {
         const self = this;
-        if (this.myName == null) {
+        if (this.myName == "") {
             if (this.isRunning == true) {
-   		    	this.wss.send("<%sn>\n" + args.NAME); // begin packet data with setname command in the header
+                this.wss.send("<%sn>\n" + args.NAME); // begin packet data with setname command in the header
                 self.myName = args.NAME;
-		    	return "Set username on server successfully.";
-   		    }
-		    else {
-		    	return "Connection closed, no action taken.";
-		    }
+                return "Set username on server successfully.";
+            } else {
+                return "Connection closed, no action taken.";
+            }
         } else {
             return "Username already set!";
         };
     }
-    
 }
 
 Scratch.extensions.register(new cloudlink());
