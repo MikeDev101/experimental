@@ -131,9 +131,9 @@ class cloudlink {
             this.wss.onmessage = function(event) {
                 var str = String(event.data);
                 console.log(str);
-                var obj = JSON.parse(str);
-                console.log(obj[0].type);
-                console.log(obj[0].data);
+                var tmp = JSON.stringify(str);
+                var obj = JSON.parse(tmp);
+                console.log(obj[0]);
             };
             this.wss.onclose = function(event) {
                 if (event.wasClean) {
