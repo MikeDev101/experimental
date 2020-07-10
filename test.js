@@ -11,6 +11,7 @@ class cloudlink {
     constructor(runtime, extensionId) {
         this.runtime = runtime;
         this.sGData = "";
+        this.sPData = "";
         this.isRunning = false;
         this.status = "Ready";
     }
@@ -31,6 +32,11 @@ class cloudlink {
                     opcode: 'getGData',
                     blockType: Scratch.BlockType.REPORTER,
                     text: 'Socket Data (Global)',
+                },
+                {
+                    opcode: 'getPData',
+                    blockType: Scratch.BlockType.REPORTER,
+                    text: 'Socket Data (Private)',
                 },
                 {
                     opcode: 'getStatus',
@@ -59,7 +65,7 @@ class cloudlink {
                     text: 'Disconnect',
                 },
                 {
-                    opcode: 'sendData',
+                    opcode: 'sendPData',
                     blockType: Scratch.BlockType.COMMAND,
                     text: 'Send [DATA]',
                     arguments: {
@@ -121,7 +127,7 @@ class cloudlink {
         return this.isRunning;
     }
 
-    sendData(args) {
+    sendPData(args) {
    		if (this.isRunning == true) {
    			this.wss.send("<%ps>\n" + args.DATA); // begin packet data with public stream idenifier in the header
 			return "Sent data successfully.";
@@ -133,6 +139,10 @@ class cloudlink {
 
     getGData() {
         return this.sGData;
+    }
+    
+    getPData() {
+        return this.sPData;
     }
 
     getStatus() {
