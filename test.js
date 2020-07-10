@@ -161,7 +161,7 @@ class cloudlink {
     closeSocket() {
         const self = this;
         if (this.isRunning == true) {
-            this.wss.send("<%ds>\n" + this.myName) // send disconnect command in header before shutting down link
+            this.wss.send("<%ds>\n" + myName) // send disconnect command in header before shutting down link
             this.wss.close(1000);
             self.isRunning = false;
             myName = "";
