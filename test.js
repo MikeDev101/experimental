@@ -65,13 +65,28 @@ class cloudlink {
                     text: 'Disconnect',
                 },
                 {
-                    opcode: 'sendPData',
+                    opcode: 'sendGData',
                     blockType: Scratch.BlockType.COMMAND,
-                    text: 'Send [DATA]',
+                    text: 'Send [DATA] (Global)',
                     arguments: {
                         DATA: {
                             type: Scratch.ArgumentType.STRING,
                             defaultValue: 'thing',
+                        },
+                    },
+                },
+                {
+                    opcode: 'sendPData',
+                    blockType: Scratch.BlockType.COMMAND,
+                    text: 'Send [DATA] to [ID] (Private)',
+                    arguments: {
+                        DATA: {
+                            type: Scratch.ArgumentType.STRING,
+                            defaultValue: 'thing',
+                        },
+                        ID: {
+                            type: Scratch.ArgumentType.STRING,
+                            defaultValue: 'user',
                         },
                     },
                 },
@@ -127,9 +142,19 @@ class cloudlink {
         return this.isRunning;
     }
 
-    sendPData(args) {
+    sendGData(args) {
    		if (this.isRunning == true) {
-   			this.wss.send("<%ps>\n" + args.DATA); // begin packet data with public stream idenifier in the header
+   			this.wss.send("<%gs>\n" + args.DATA); // begin packet data with global stream idenifier in the header
+			return "Sent data successfully.";
+   		}
+		else {
+			return "Connection closed, no action taken.";
+		}
+    }
+    
+    sendPData(args) {
+        if (this.isRunning == true) {
+   			this.wss.send("<%ps>\n" + args.ID + "\n" + args.DATA); // begin packet data with global stream idenifier in the header
 			return "Sent data successfully.";
    		}
 		else {
