@@ -219,7 +219,7 @@ class cloudlink {
     }
 
     setMyName(args) {
-        if (this.myName == "") {
+        if (myName == "") {
             if (this.isRunning == true) {
                 this.wss.send("<%sn>\n" + args.NAME); // begin packet data with setname command in the header
                 myName = args.NAME;
