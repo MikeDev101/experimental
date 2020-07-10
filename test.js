@@ -133,7 +133,9 @@ class cloudlink {
                 if (obj["type"] == "gs") {
                     self.sGData = String(obj["data"]);
                 } else if (obj["type"] == "ps") {
-                    if (obj["id"] == this.myName) {
+                    console.log(String(obj["id"]));
+                    console.log(String(obj["id"]) == String(this.myName));
+                    if (String(obj["id"]) == String(this.myName)) {
                         self.sPData = String(obj["data"]);
                     };
                 };
