@@ -129,13 +129,8 @@ class cloudlink {
                 console.log("CloudLink API v" + vers + " | Connected to server.");
             };
             this.wss.onmessage = function(event) {
-                var tmp = String(event.data);
-                var tmp2 = tmp.slice(1, -1);
-                var tmp3 = tmp2.split('\n');
-                console.log("[ i ] tmp3: " + tmp3[0] + ", " + tmp3[1]);
-                if (tmp3[0] == "<%gs>") {
-                    self.sGData = tmp3[1];
-                };
+                var tmp = JSON.parse(String(event.data));
+                console.log("tmp: " + tmp);
             };
             this.wss.onclose = function(event) {
                 if (event.wasClean) {
