@@ -137,11 +137,18 @@ class cloudlink {
                     if (String(obj["id"]) == String(myName)) {
                         self.sPData = String(obj["data"]);
                     };
+                } else if (obj["type"] == "ul") {
+                    self.userNames = String(obj["data"]);
+                } else {
+                    console.log("CloudLink API v" + vers + " | Error! Unknown command: " + String(obj));
                 };
             };
             this.wss.onclose = function(event) {
                 if (event.wasClean) {
                     self.isRunning = false;
+                    self.isRunning = false;
+                    myName = "";
+                    self.userNames = "";
                     self.status = "Disconnected, OK";
                     console.log("CloudLink API v" + vers + " | Server has been cleanly disconnected. :)");
                 } else {
