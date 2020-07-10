@@ -130,7 +130,8 @@ class cloudlink {
             };
             this.wss.onmessage = function(event) {
                 var str = ("[" + String(event.data) + "]")
-                console.log(str)
+                var str2 = eval('(' + str + ')')
+                console.log(str + ", " + str2)
                 var tmp = JSON.parse(str);
                 console.log("tmp: " + tmp);
             };
