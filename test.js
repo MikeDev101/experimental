@@ -99,7 +99,7 @@ class cloudlink {
                         },
                         ID: {
                             type: Scratch.ArgumentType.STRING,
-                            defaultValue: 'user',
+                            defaultValue: 'a name',
                         },
                     },
                 },
@@ -110,7 +110,7 @@ class cloudlink {
                     arguments: {
                         NAME: {
                             type: Scratch.ArgumentType.STRING,
-                            defaultValue: 'bob',
+                            defaultValue: 'a name',
                         },
                     },
                 },
@@ -149,6 +149,8 @@ class cloudlink {
                     self.isRunning = false;
                     myName = "";
                     self.userNames = "";
+                    self.sGData = "";
+                    self.sPData = "";
                     self.status = "Disconnected, OK";
                     console.log("CloudLink API v" + vers + " | Server has been cleanly disconnected. :)");
                 } else {
@@ -156,6 +158,8 @@ class cloudlink {
                     self.isRunning = false;
                     myName = "";
                     self.userNames = "";
+                    self.sGData = "";
+                    self.sPData = "";
                     self.status = "Disconnected, ERR";
                     console.log("CloudLink API v" + vers + " | Server unexpectedly disconnected. :(");
                 };
@@ -173,6 +177,8 @@ class cloudlink {
             self.isRunning = false;
             myName = "";
             self.userNames = "";
+            self.sGData = "";
+            self.sPData = "";
             self.status = "Disconnected, OK";
             return ("Connection closed.");
         } else {
