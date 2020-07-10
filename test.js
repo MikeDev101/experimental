@@ -133,6 +133,10 @@ class cloudlink {
                 var obj = JSON.parse(event.data);
                 console.log("type: " + obj["type"]);
                 console.log("data: " + obj["data"]);
+                
+                if (obj["type"] == "gs") {
+                    self.sGData = String(obj["data"])
+                }
             };
             this.wss.onclose = function(event) {
                 if (event.wasClean) {
