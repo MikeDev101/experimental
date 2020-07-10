@@ -14,6 +14,8 @@ class cloudlink {
         this.sPData = "";
         this.isRunning = false;
         this.status = "Ready";
+        this.myName = null;
+        this.userNames = "";
     }
 
     static get STATE_KEY() {
@@ -42,6 +44,16 @@ class cloudlink {
                     opcode: 'getStatus',
                     blockType: Scratch.BlockType.REPORTER,
                     text: 'Status',
+                },
+                {
+                    opcode: 'getCNames',
+                    blockType: Scratch.BlockType.REPORTER,
+                    text: 'Connected Users',
+                },
+                {
+                    opcode: 'getMyName',
+                    blockType: Scratch.BlockType.REPORTER,
+                    text: 'My Username',
                 },
                 {
                     opcode: 'getSocketState',
@@ -90,6 +102,17 @@ class cloudlink {
                         },
                     },
                 },
+                {
+                    opcode: 'setMyName',
+                    blockType: Scratch.BlockType.COMMAND,
+                    text: 'Set [NAME] as my username',
+                    arguments: {
+                        NAME: {
+                            type: Scratch.ArgumentType.STRING,
+                            defaultValue: 'bob',
+                        },
+                    },
+                },
             ],
         };
     }
@@ -131,6 +154,8 @@ class cloudlink {
             this.wss.send("<%ds>\n") // send disconnect command in header before shutting down link
             this.wss.close(1000);
             self.isRunning = false;
+            self.myName = null;
+            self.userNames = "";
             self.status = "Disconnected, OK";
             return ("Connection closed.");
         } else {
@@ -172,6 +197,30 @@ class cloudlink {
 
     getStatus() {
         return this.status;
+    }
+    
+    getCNames() {
+        return this.userNames;
+    }
+    
+    getMyName() {
+        return this.myName;
+    }
+    
+    setMyName(args) {
+        const self = this;
+        if (this.myName == null) {
+            if (this.isRunning == true) {
+   		    	this.wss.send("<%sn>\n" + args.NAME); // begin packet data with setname command in the header
+                self.myName = args.NAME;
+		    	return "Set username on server successfully.";
+   		    }
+		    else {
+		    	return "Connection closed, no action taken.";
+		    }
+        } else {
+            return "Username already set!";
+        };
     }
     
 }
