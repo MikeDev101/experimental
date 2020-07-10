@@ -137,7 +137,7 @@ class cloudlink {
                 var tmp3 = tmp2.split('\n');
                 console.log("[ i ] tmp3: " + tmp3);
                 if (tmp3[0] == "<%gs>") {
-                    console.log("tmp3: " tmp3[0] + ", " + tmp3[1])
+                    console.log("tmp3: " + tmp3[0] + ", " + tmp3[1])
                     self.sGData = tmp3[1]
                 };
             };
