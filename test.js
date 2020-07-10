@@ -140,6 +140,9 @@ class cloudlink {
                     console.log("CloudLink API v" + vers + " | Server has been cleanly disconnected. :)");
                 } else {
                     self.isRunning = false;
+                    self.isRunning = false;
+                    self.myName = "";
+                    self.userNames = "";
                     self.status = "Disconnected, ERR";
                     console.log("CloudLink API v" + vers + " | Server unexpectedly disconnected. :(");
                 };
