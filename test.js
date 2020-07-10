@@ -76,7 +76,7 @@ class cloudlink {
         const WSS = args.WSS;
         if (this.isRunning == false) {
             const self = this;
-            self.status = "connecting";
+            self.status = "Connecting";
             console.log("CloudLink API v" + vers + " | Attempting connection to server...");
             this.wss = new WebSocket(WSS);
             this.wss.onopen = function(e) {
