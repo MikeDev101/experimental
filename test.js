@@ -133,7 +133,8 @@ class cloudlink {
                 console.log(str);
                 var tmp = JSON.stringify(str);
                 var obj = JSON.parse(tmp);
-                console.log(obj[0]);
+                console.log("type: " + obj["type"]);
+                console.log("data: " + obj["data"]);
             };
             this.wss.onclose = function(event) {
                 if (event.wasClean) {
