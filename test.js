@@ -130,8 +130,11 @@ class cloudlink {
             };
             this.wss.onmessage = function(event) {
                 var tmp = String(event.data);
-                var tmp2 = tmp.slice(1, -1)
-                self.sGData = tmp2;
+                var tmp2 = tmp.slice(1, -1);
+                var tmp3 = tmp2.split("\n");
+                if (tmp3[0] == "<%gs>") {
+                    self.sGData = tmp3[1]
+                };
             };
             this.wss.onclose = function(event) {
                 if (event.wasClean) {
