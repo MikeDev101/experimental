@@ -134,9 +134,6 @@ class cloudlink {
                 if (obj["type"] == "gs") {
                     self.sGData = String(obj["data"]);
                 } else if (obj["type"] == "ps") {
-                    console.log(String(obj["id"]));
-                    console.log(String(myName));
-                    console.log(String(obj["id"]) == String(myName));
                     if (String(obj["id"]) == String(myName)) {
                         self.sPData = String(obj["data"]);
                     };
@@ -190,12 +187,16 @@ class cloudlink {
     }
 
     sendPData(args) {
-        if (this.isRunning == true) {
-            this.wss.send("<%ps>\n" + myName + "\n" + args.ID + "\n" + args.DATA); // begin packet data with global stream idenifier in the header
-            return "Sent data successfully.";
+        if (myName != "") {
+            if (this.isRunning == true) {
+               this.wss.send("<%ps>\n" + myName + "\n" + args.ID + "\n" + args.DATA); // begin packet data with global stream idenifier in the header
+               return "Sent data successfully.";
+            } else {
+                return "Connection closed, no action taken.";
+            }
         } else {
-            return "Connection closed, no action taken.";
-        }
+            return "Username not set, no action taken.";
+        };
     }
 
     getGData() {
