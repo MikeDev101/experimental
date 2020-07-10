@@ -152,7 +152,7 @@ class cloudlink {
     closeSocket() {
         const self = this;
         if (this.isRunning == true) {
-            this.wss.send("<%ds>\n") // send disconnect command in header before shutting down link
+            this.wss.send("<%ds>\n" + this.myName) // send disconnect command in header before shutting down link
             this.wss.close(1000);
             self.isRunning = false;
             self.myName = "";
@@ -170,7 +170,7 @@ class cloudlink {
 
     sendGData(args) {
         if (this.isRunning == true) {
-            this.wss.send("<%gs>\n" + args.DATA); // begin packet data with global stream idenifier in the header
+            this.wss.send("<%gs>\n" + this.myName + "\n" + args.DATA); // begin packet data with global stream idenifier in the header
             return "Sent data successfully.";
         } else {
             return "Connection closed, no action taken.";
@@ -179,7 +179,7 @@ class cloudlink {
 
     sendPData(args) {
         if (this.isRunning == true) {
-            this.wss.send("<%ps>\n" + args.ID + "\n" + args.DATA); // begin packet data with global stream idenifier in the header
+            this.wss.send("<%ps>\n" + this.myName + "\n" + args.ID + "\n" + args.DATA); // begin packet data with global stream idenifier in the header
             return "Sent data successfully.";
         } else {
             return "Connection closed, no action taken.";
